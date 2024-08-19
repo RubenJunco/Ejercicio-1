@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canvas</title>
+    <style type="text/css">
+        body{
+            background-color: gray;
+        }
+        canvas{
+            background-color: white;
+        }
+    </style>
+
+</head>
+<body>
+    <canvas id="myCanvas" width="600" height="750"></canvas>
+    <script>
+
+        const myCanvas = document.getElementById("myCanvas");
+        const ctx = myCanvas.getContext("2d");
+
+        ctx.fillStyle = "red";
+        ctx.fillRect(80, 80, 100, 100);
+
+        ctx.fillStyle = "green";
+        ctx.fillRect(240, 240, 100, 100);
+
+        ctx.fillStyle = 'rgb(41, 30, 52,0.5)';
+        ctx.fillRect(160, 160, 100, 100);
+        
+        ctx.strokeRect(300, 300, 100, 100); 
+
+        ctx.strokeStyle = "red";
+        ctx.lineWidth = 4;
+        ctx.strokeRect(360, 360, 100, 100);
+      
+
+
+        //Triangulo
+        
+        ctx.strokeStyle = 'rgb(255, 0, 0)'; 
+        ctx.fillStyle = 'rgb(72, 171, 193,0.5)';
+         ctx.beginPath();
+
+         ctx.moveTo(150, 600);
+
+         ctx.lineTo(350, 100); 
+         ctx.lineTo(150, 300);  
+         ctx.closePath();      
+         ctx.lineWidth = 4;
+         ctx.stroke();
+         ctx.fill();
+
+    </script>
+</body>
+</html>
