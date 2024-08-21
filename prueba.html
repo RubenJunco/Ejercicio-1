@@ -21,29 +21,33 @@
         const myCanvas = document.getElementById("myCanvas");
         const ctx = myCanvas.getContext("2d");
 
-
+        function getRandomColor(){
+            var trans = '0.5';
+            var color = 'rgba(';
+            for (var i = 0; i < 3; i++) {
+                color += Math.floor(Math.random() * 255) + ',';
+            }
+            color += trans + ')';
+            return color;
+        }
+        
         //circulo con click
-       /* document.getElementById("myCanvas").addEventListener("click" ,function (e){
+        document.getElementById("myCanvas").addEventListener("click" ,function (e){
             ctx.beginPath();
             ctx.arc(e.x,e.y,50,0, 2 * Math.PI);
-            ctx.fillStyle = 'rgba(200, 168, 161, 0.5)';
-            ctx.strokeStyle = "RED";
-            ctx.lineWidth = 2;
+           
 
-            ctx.stroke();
             ctx.fill();
-        });*/
-        
-        //cierculos de colores con clic
-       document.getElementById("myCanvas").addEventListener("mouseover",function (e){
-        ctx.beginPath();
-            ctx.arc(e.x,e.y,50,0, 2 * Math.PI);
-            ctx.strokeStyle = 'rgba(200, 168, 161, 0.5)';
-            ctx.lineWidth = 2.4;
-            ctx.fillStyle = "red";
             ctx.stroke();
-            ctx.fill();
         });
+        
+        //circulos de colores con clic
+       document.getElementById("myCanvas").addEventListener("mouseover",function (e){
+        ctx.fillStyle = getRandomColor();
+        ctx.strokeStyle = getRandomColor;
+        })
+
+       
 
     </script>
 </body>
