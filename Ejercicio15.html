@@ -21,6 +21,9 @@
         const myCanvas = document.getElementById("myCanvas");
         const ctx = myCanvas.getContext("2d");
 
+        let drawCircleNext = true; 
+        let isDrawing = false; 
+
         function getRandomColor(){
             var trans = '0.5';
             var color = 'rgba(';
@@ -33,39 +36,44 @@
         
         function drawCircle(x, y) {
             ctx.beginPath();
-            ctx.arc(x, y, 5, 0, Math.PI * 2, false);
+            ctx.arc(x, y, 50, 0, Math.PI * 2, false);
             ctx.fillStyle = getRandomColor();
             ctx.fill();
             ctx.closePath();
         }
-        
 
-        document.getElementById("myCanvas").addEventListener("mouseout" , (event) => {
-            document.getElementById("myCanvas").addEventListener("click" ,function (e){
+        function drawDot(x, y) {
             ctx.beginPath();
-            ctx.arc(e.x,e.y,50,0, 2 * Math.PI);
-           
+            ctx.arc(x, y, 3, 0, Math.PI * 2, false); 
+            ctx.fillStyle = "black";
             ctx.fill();
-            ctx.stroke();
+            ctx.closePath();
+        }
+
+       //Eventos
+
+        myCanvas.addEventListener("mouseout", () => {
+            myCanvas.addEventListener("click", handleClick);
         });
 
-            
+        
+        myCanvas.addEventListener("mousedown", () => {
+            isDrawing = true;
         });
 
-
-
-   
-        //circulos de colores con clic
-        document.getElementById("myCanvas").addEventListener("mouseover", function (e) {
-            ctx.fillStyle = getRandomColor();
-            ctx.strokeStyle = getRandomColor();
+       
+        myCanvas.addEventListener("mouseup", () => {
+            isDrawing = false;
         });
 
-        document.getElementById("myCanvas").addEventListener('mousemove', (event) => {
-            const rect = myCanvas.getBoundingClientRect();
-            const x = event.clientX - rect.left;
-            const y = event.clientY - rect.top;
-            drawCircle(x, y);
+        // Dibujar los puntitos
+        myCanvas.addEventListener("mousemove", (event) => {
+            if (isDrawing) {
+                const rect = myCanvas.getBoundingClientRect();
+                const x = event.clientX - rect.left;
+                const y = event.clientY - rect.top;
+                drawDot(x, y);
+            }
         });
 
     </script>
