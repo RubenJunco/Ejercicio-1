@@ -15,67 +15,56 @@
 
 </head>
 <body>
-    <canvas id="myCanvas" width="600" height="750"></canvas>
-    <script>
-
-        const myCanvas = document.getElementById("myCanvas");
-        const ctx = myCanvas.getContext("2d");
-
-        let drawCircleNext = true; 
-        let isDrawing = false; 
-
-        function getRandomColor(){
-            var trans = '0.5';
-            var color = 'rgba(';
-            for (var i = 0; i < 3; i++) {
-                color += Math.floor(Math.random() * 255) + ',';
+  
+    <body>
+        <canvas id="myCanvas" width="600" height="750"></canvas>
+        <script>
+    
+            const myCanvas = document.getElementById("myCanvas");
+            const ctx = myCanvas.getContext("2d");
+            var x = 100;
+            var y = 100;
+    
+            const size = 100; 
+            const movimiento = 10; 
+    
+            function drawSquare() {
+                
+                ctx.clearRect(0, 0, myCanvas.width, myCanvas.height);
+                
+               
+                ctx.fillStyle = "red";
+                ctx.fillRect(x, y, size, size);
             }
-            color += trans + ')';
-            return color;
-        }
-        
-        function drawCircle(x, y) {
-            ctx.beginPath();
-            ctx.arc(x, y, 50, 0, Math.PI * 2, false);
-            ctx.fillStyle = getRandomColor();
-            ctx.fill();
-            ctx.closePath();
-        }
+    
+            document.addEventListener('keypress', (event) => {
+                switch (event.key) {
+                    case 'w': 
+                        y = Math.max(y - movimiento, 0); 
+                        break;
+                    case 's': 
+                        y = Math.min(y + movimiento, myCanvas.height - size);
+                        break;
+                    case 'a': 
+                        x = Math.max(x - movimiento, 0);
+                        break;
+                    case 'd': 
+                        x = Math.min(x + movimiento, myCanvas.width - size);
+                        break;
+                }
+                drawSquare(); 
+            });
+    
+            drawSquare(); 
+    
+    
+          
+        </script>
+    </body>
+    </html>
+    
 
-        function drawDot(x, y) {
-            ctx.beginPath();
-            ctx.arc(x, y, 3, 0, Math.PI * 2, false); 
-            ctx.fillStyle = "black";
-            ctx.fill();
-            ctx.closePath();
-        }
-
-       //Eventos
-
-        myCanvas.addEventListener("mouseout", () => {
-            myCanvas.addEventListener("click", handleClick);
-        });
-
-        
-        myCanvas.addEventListener("mousedown", () => {
-            isDrawing = true;
-        });
-
-       
-        myCanvas.addEventListener("mouseup", () => {
-            isDrawing = false;
-        });
-
-        // Dibujar los puntitos
-        myCanvas.addEventListener("mousemove", (event) => {
-            if (isDrawing) {
-                const rect = myCanvas.getBoundingClientRect();
-                const x = event.clientX - rect.left;
-                const y = event.clientY - rect.top;
-                drawDot(x, y);
-            }
-        });
-
+      
     </script>
 </body>
 </html>
