@@ -23,9 +23,9 @@
         let y = 100;
 
         function dibujarCuadrado() {
-            ctx.clearRect(0, 0, myCanvas.width, myCanvas.height); // Limpia el lienzo
+            ctx.clearRect(0, 0, myCanvas.width, myCanvas.height); 
             ctx.fillStyle = "red";
-            ctx.fillRect(x, y, 50, 50); // Dibuja el cuadrado en la nueva posición
+            ctx.fillRect(x, y, 50, 50); 
         }
 
         document.addEventListener("keydown", event => {
@@ -34,19 +34,19 @@
             if (event.key === "a") x -= movimiento;
             if (event.key === "d") x += movimiento;
 
-            // Simple ajuste de coordenadas cuando toca un borde
+           
             if (x > myCanvas.width) x = 0;
             if (x < 0) x = myCanvas.width;
             if (y > myCanvas.height) y = 0;
             if (y < 0) y = myCanvas.height;
 
-            dibujarCuadrado(); // Redibuja el cuadrado en la nueva posición
+            dibujarCuadrado(); 
         });
 
-        // Dibujar el cuadrado inicialmente
+       
         dibujarCuadrado();
 
-        // Mostrar la tecla presionada en la consola
+       //Para ver el codigo
         document.addEventListener("keydown", event => {
             console.log(event.key);
         });
