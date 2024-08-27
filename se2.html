@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canvas</title>
+    <style type="text/css">
+        body {
+            background-color: gray;
+        }
+        canvas {
+            background-color: white;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="myCanvas" width="600" height="750"></canvas>
+    <script>
+        const myCanvas = document.getElementById("myCanvas");
+        const ctx = myCanvas.getContext("2d");
+        const movimiento = 10;
+        let x = 100;
+        let y = 100;
+
+        function dibujarCuadrado() {
+            ctx.clearRect(0, 0, myCanvas.width, myCanvas.height); // Limpia el lienzo
+            ctx.fillStyle = "red";
+            ctx.fillRect(x, y, 50, 50); // Dibuja el cuadrado en la nueva posición
+        }
+
+        document.addEventListener("keydown", event => {
+            if (event.key === "w") y -= movimiento;
+            if (event.key === "s") y += movimiento;
+            if (event.key === "a") x -= movimiento;
+            if (event.key === "d") x += movimiento;
+
+            // Simple ajuste de coordenadas cuando toca un borde
+            if (x > myCanvas.width) x = 0;
+            if (x < 0) x = myCanvas.width;
+            if (y > myCanvas.height) y = 0;
+            if (y < 0) y = myCanvas.height;
+
+            dibujarCuadrado(); // Redibuja el cuadrado en la nueva posición
+        });
+
+        // Dibujar el cuadrado inicialmente
+        dibujarCuadrado();
+
+        // Mostrar la tecla presionada en la consola
+        document.addEventListener("keydown", event => {
+            console.log(event.key);
+        });
+    </script>
+</body>
+</html>
