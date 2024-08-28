@@ -10,18 +10,16 @@
 <body>
     <canvas id="canvas" width="1000px" height="1000px"></canvas>
     <script type="text/javascript">
-
-        
         const myCanvas = document.getElementById("canvas");
         const ctx = myCanvas.getContext("2d");
 
-        var speed = 8; 
+        var speed = 8;
 
         var x = 100;
         var y = 100;
         var direction = " ";
 
-        //keys 
+        
         document.addEventListener("keydown", (event) => {
 
             console.log(event.key)
@@ -48,11 +46,9 @@
                     direction = "right";
                     break;
 
-                case "q" || "Q" : 
-                    speed+=2.5;
-                    break;  
-
-
+                case "q" || "Q":
+                    speed += 3;
+                    break;
 
             }
             update()
@@ -90,11 +86,6 @@
                     }
                     break;
 
-       /*   if (event.key === "w") y -= movimiento;
-            if (event.key === "s") y += movimiento;
-            if (event.key === "a") x -= movimiento;
-            if (event.key === "d") x += movimiento;
-       */
             }
         };
 
@@ -109,10 +100,9 @@
             ctx.fillStyle = "white";
             ctx.fillRect(0, 0, 600, 500);
             ctx.fillStyle = "blue";
-            ctx.fillRect(x, y, 50, 50)
+            ctx.fillRect(x, y, 50, 50);
 
-            drawSpeed(paint)
-
+            drawSpeed(); 
             update();
             requestAnimationFrame(paint);
         }
@@ -126,11 +116,6 @@
                     window.setTimeout(callback, 17);
                 };
         }());
-
-
-
-
-       
     </script>
 
     <style type="text/css">
