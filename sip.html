@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <canvas id="canvas" width="1000px" height="1000px"></canvas>
+    <script type="text/javascript">
+        const myCanvas = document.getElementById("canvas");
+        const ctx = myCanvas.getContext("2d");
+
+        var x = 100;
+        var y = 100;
+        var direction = " ";
+
+        //keys 
+        document.addEventListener("keydown", (event) => {
+
+            console.log(event.key)
+            ctx.fillStyle = "white";
+            ctx.fillRect(0, 0, 600, 500);
+            ctx.fillStyle = "red";
+            ctx.fillRect(x, y, 50, 50)
+
+            switch (event.key) {
+                
+                case "w" || "W":
+                    direction = "up";
+                    break;
+               
+                case "s" || "S":
+                    direction = "down";
+                    break;
+              
+                case "a" || "A":
+                    direction = "left";
+                    break;
+                
+                case "d" || "D":
+                    direction = "right";
+                    break;
+
+
+
+            }
+            update()
+        });;
+
+        function update() {
+            switch (direction) {
+                case "up":
+                    y -= 5
+                    if (y <= 0) {
+                        y = 450
+                    }
+                    break;
+
+                case "down":
+                    y += 5
+                    if (y >= 450) {
+                        y = 0
+                    }
+                    break;
+
+                case "left":
+                    x -= 5
+                    if (x <= 0) {
+                        x = 550
+                    }
+                    break;
+
+                case "right":
+                    x += 5
+                    if (x >= 550) {
+                        x = 0
+                    }
+                    break;
+
+       /*   if (event.key === "w") y -= movimiento;
+            if (event.key === "s") y += movimiento;
+            if (event.key === "a") x -= movimiento;
+            if (event.key === "d") x += movimiento;
+       */
+            }
+        };
+
+        function paint() {
+            
+            ctx.fillStyle = "white";
+            ctx.fillRect(0, 0, 600, 500);
+            ctx.fillStyle = "blue";
+            ctx.fillRect(x, y, 50, 50)
+
+            update();
+            requestAnimationFrame(paint);
+        }
+        requestAnimationFrame(paint);
+
+        window.requestAnimationFrame = (function () {
+            return window.requestAnimationFrame ||
+                window.webkitRequestAnimationFrame ||
+                window.mozRequestAnimationFrame ||
+                function (callback) {
+                    window.setTimeout(callback, 17);
+                };
+        }());
+
+
+
+
+
+
+    </script>
+
+    <style type="text/css">
+        body {
+            background-color: rgb(247, 247, 247);
+        }
+    </style>
+</body>
+
+</html>
