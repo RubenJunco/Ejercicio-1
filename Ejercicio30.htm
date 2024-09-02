@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <canvas id="canvas" width="1000px" height="1000px"></canvas>
+   
+    <script>
+
+
+        const myCanvas = document.getElementById("canvas");
+        const ctx = myCanvas.getContext("2d");
+
+
+    
+    //fondo
+    ctx.fillStyle= 'rgb(15, 78, 164)';
+    ctx.fillRect(0,0,1000,1000);
+
+    //tierra
+    
+    ctx.strokeStyle = "black";
+    ctx.fillStyle = 'rgb(164, 110, 15 )';
+    ctx.fillRect(0,900,1000,300);
+    ctx.lineWidth = 4;
+
+    //suelo 1
+    ctx.fillStyle = 'rgb(64, 130, 41 )';
+    ctx.fillRect(0,900,1000,20);
+    ctx.lineWidth = 4;
+    //suelo 2
+    ctx.fillStyle = 'rgb(72, 164, 40 )';
+    ctx.fillRect(0,880,1000,20);
+    ctx.lineWidth = 4;
+     //suelo 3
+     ctx.fillStyle = 'rgb(79, 196, 38 )';
+    ctx.fillRect(0,860,1000,20);
+    ctx.lineWidth = 4;
+
+    //anillo 1
+    ctx.beginPath();
+         ctx.arc(250, 715, 20, 0, 2 * Math.PI);
+         ctx.strokeStyle = "yellow";
+         ctx.stroke();
+
+    //anillo 2     
+    ctx.beginPath();
+         ctx.arc(180, 715, 20, 0, 2 * Math.PI);
+         ctx.strokeStyle = "yellow";
+         ctx.stroke();    
+         
+    //anillo 3     
+    ctx.beginPath();
+         ctx.arc(110, 715, 20, 0, 2 * Math.PI);
+         ctx.strokeStyle = "yellow";
+         ctx.stroke();    
+     
+    //palmera
+    
+    ctx.fillStyle = 'rgb(164, 110, 15 )';
+    ctx.fillRect(500,660,30,200);
+
+    ctx.beginPath();
+        ctx.ellipse(600, 550, 30, 150, 7, 1,1 * Math.PI );
+        ctx.fillStyle = 'rgb(48, 102, 8 )';
+        ctx.fill(); 
+    
+    ctx.beginPath();
+        ctx.ellipse(480, 530, 30, 150, 6, 1,1 * Math.PI );
+        ctx.fillStyle = 'rgb(48, 102, 8 )';
+        ctx.fill();  
+        
+        ctx.beginPath();
+        ctx.ellipse(660, 680, 30, 150, 8, 1,1 * Math.PI );
+        ctx.fillStyle = 'rgb(48, 102, 8 )';
+        ctx.fill(); 
+         
+        ctx.beginPath();
+        ctx.ellipse(360, 600, 30, 150, 5, 1,1 * Math.PI );
+        ctx.fillStyle = 'rgb(48, 102, 8 )';
+        ctx.fill(); 
+    
+
+    //girasol
+    ctx.fillStyle = 'rgb(84, 128, 52)';
+    ctx.fillRect(890,710,20,150);
+    ctx.beginPath();
+         ctx.arc(900, 715, 25, 0, 2 * Math.PI);
+         ctx.fillStyle = 'rgb(252, 255, 155)';
+         ctx.strokeStyle = "BLACK";
+         ctx.stroke();
+         ctx.fill();
+         ctx.beginPath();
+         ctx.arc(900, 715, 10, 0, 2 * Math.PI);
+         ctx.fillStyle = 'rgb(103, 113, 23 )';
+         ctx.fill();
+
+    </script>
+
+</body>
+</html>
