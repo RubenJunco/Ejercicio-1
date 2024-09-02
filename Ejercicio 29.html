@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <canvas id="canvas" width="1000px" height="1000px"></canvas>
+    <script>
+    const myCanvas = document.getElementById("canvas");
+    const ctx = myCanvas.getContext("2d");
+
+
+    
+   //fondo
+    ctx.fillStyle= 'rgb(184, 253, 244)';
+    ctx.fillRect(0,0,1000,1000);
+
+    //tierra
+    ctx.strokeRect(340,500,200,400);
+    ctx.strokeStyle = "black";
+    ctx.fillStyle = 'rgb(228, 185, 100)';
+    ctx.fillRect(0,900,1000,100);
+    ctx.lineWidth = 4;
+
+    //suelo
+    ctx.fillStyle = "black";
+    ctx.fillRect(0,900,1000,4);
+    ctx.lineWidth = 4;
+  
+
+     //sombra block 2
+     ctx.fillStyle = "black";
+    ctx.fillRect(480,600,100,300);
+    ctx.lineWidth = 4;
+
+     //blok 2
+    ctx.strokeRect(340,500,200,400);
+    ctx.strokeStyle = "black";
+    ctx.fillStyle = 'rgb(133, 245, 229)';
+    ctx.fillRect(340,500,200,400);
+    ctx.lineWidth = 4;
+
+    //sombra block 1
+    ctx.fillStyle = "black";
+    ctx.fillRect(340,700,100,200);
+    ctx.lineWidth = 4;
+
+   
+    //blok 1
+    ctx.strokeRect(200,600,200,300);
+    ctx.strokeStyle = "black";
+    ctx.fillStyle = 'rgb(228, 185, 100 )';
+    ctx.fillRect(200,600,200,300);
+    ctx.lineWidth = 4;
+
+    //tuerca 1 block 1
+    ctx.beginPath();
+    ctx.arc(510, 525, 15, 0, 2 * Math.PI);
+    ctx.fillStyle = 'rgb(144, 144, 144 )'
+    ctx.stroke();
+    ctx.fill();
+
+    //tuerca 2 block 1
+    ctx.beginPath();
+    ctx.arc(370, 525, 15, 0, 2 * Math.PI);
+    ctx.fillStyle = 'rgb(144, 144, 144 )'
+    ctx.stroke();
+    ctx.fill();
+    
+    //tuerca 1 block 2
+    ctx.beginPath();
+    ctx.arc(230, 625, 15, 0, 2 * Math.PI);
+    ctx.fillStyle = 'rgb(144, 144, 144 )'
+    ctx.stroke();
+    ctx.fill();
+
+    //tuerca 2 block 2
+    ctx.beginPath();
+    ctx.arc(370, 625, 15, 0, 2 * Math.PI);
+    ctx.fillStyle = 'rgb(144, 144, 144 )'
+    ctx.stroke();
+    ctx.fill();
+
+    //tubenria 1.0
+    ctx.strokeRect(650,720,120,180);
+    ctx.strokeStyle = "black";
+    ctx.fillStyle = 'rgb(43, 142, 27 )';
+    ctx.fillRect(650,720,120,180);
+    ctx.lineWidth = 4;
+     //tubenria 1.1
+     ctx.strokeRect(630,710,160,80);
+    ctx.strokeStyle = "black";
+    ctx.fillStyle = 'rgb(43, 142, 27 )';
+    ctx.fillRect(630,710,160,80);
+    ctx.lineWidth = 4;
+
+     //blok 3
+     ctx.strokeRect(850,700,300,200);
+    ctx.strokeStyle = "black";
+    ctx.fillStyle = 'rgb(90, 255, 82  )';
+    ctx.fillRect(850,700,300,200);
+    ctx.lineWidth = 4;
+
+     //tuerca 1 block 3
+     ctx.beginPath();
+    ctx.arc(870, 725, 15, 0, 2 * Math.PI);
+    ctx.fillStyle = 'rgb(144, 144, 144 )'
+    ctx.stroke();
+    ctx.fill();
+
+    //tuerca 2 block 3
+    ctx.beginPath();
+    ctx.arc(870, 875, 15, 0, 2 * Math.PI);
+    ctx.fillStyle = 'rgb(144, 144, 144 )'
+    ctx.stroke();
+    ctx.fill();
+    
+    //lucky blocl 1
+    ctx.strokeRect(100,700,70,70);
+    ctx.strokeStyle = "black";
+    ctx.fillStyle = 'rgb(241, 202, 40)';
+    ctx.fillRect(100,700,70,70);
+    ctx.lineWidth = 4;
+
+     //lucky blocl 2
+     ctx.strokeRect(100,400,70,70);
+    ctx.strokeStyle = "black";
+    ctx.fillStyle = 'rgb(241, 202, 40)';
+    ctx.fillRect(100,400,70,70);
+    ctx.lineWidth = 4;
+
+    //lucky blocl 3
+    ctx.strokeRect(170,400,70,70);
+    ctx.strokeStyle = "black";
+    ctx.fillStyle = 'rgb(241, 202, 40)';
+    ctx.fillRect(170,400,70,70);
+    ctx.lineWidth = 4;
+
+
+     //lucky blocl 4
+     ctx.strokeRect(770,600,70,70);
+    ctx.strokeStyle = "black";
+    ctx.fillStyle = 'rgb(241, 202, 40)';
+    ctx.fillRect(770,600,70,70);
+    ctx.lineWidth = 4;
+
+</script> 
+</body>
+</html>
