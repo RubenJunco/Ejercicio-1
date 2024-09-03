@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <canvas id="canvas" width="1000px" height="1000px"></canvas>
+    <script type="text/javascript">
+        const myCanvas = document.getElementById("canvas");
+        const ctx = myCanvas.getContext("2d");
+
+        var speed = 9;
+
+      
+        function figura(x, y, t, color) {
+            this.x = x;
+            this.y = y;
+            this.size = t;
+            this.color = color;
+        }
+
+        //prototipe como te amo
+        figura.prototype.draw = function () {
+            ctx.fillStyle = this.color;
+            ctx.fillRect(this.x, this.y, this.size, this.size);
+        };
+
+        
+        figura.prototype.move = function (direction) {
+            switch (direction) {
+                case "up":
+                    this.y -= speed;
+                    if (this.y < 0) this.y = 0;
+                    break;
+                case "down":
+                    this.y += speed;
+                    if (this.y + this.size > myCanvas.height) this.y = myCanvas.height - this.size;
+                    break;
+                case "left":
+                    this.x -= speed;
+                    if (this.x < 0) this.x = 0;
+                    break;
+                case "right":
+                    this.x += speed;
+                    if (this.x + this.size > myCanvas.width) this.x = myCanvas.width - this.size;
+                    break;
+            }
+        };
+
+       
+        figura.prototype.isCollidingWith = function (otherSquare) {
+            return !(this.x + this.size < otherSquare.x ||
+                this.x > otherSquare.x + otherSquare.size ||
+                this.y + this.size < otherSquare.y ||
+                this.y > otherSquare.y + otherSquare.size);
+        };
+
+      
+        figura.prototype.randomPosition = function () {
+            this.x = Math.floor(Math.random() * (myCanvas.width - this.size));
+            this.y = Math.floor(Math.random() * (myCanvas.height - this.size));
+        };
+
+    
+        let movableSquare = new figura(100, 100, 50, "red");
+        let staticSquare = new figura(400, 400, 50, "blue");
+
+        let direction = "";
+
+        document.addEventListener("keydown", (event) => {
+            switch (event.key) {
+                case "w":
+                    direction = "up";
+                    break;
+                case "s":
+                    direction = "down";
+                    break;
+                case "a":
+                    direction = "left";
+                    break;
+                case "d":
+                    direction = "right";
+                    break;
+            }
+        });
+
+        function update() {
+            movableSquare.move(direction);
+
+    
+            if (movableSquare.isCollidingWith(staticSquare)) {
+                staticSquare.randomPosition();
+            }
+
+            direction = ""; 
+        }
+
+        function paint() {
+            ctx.clearRect(0, 0, 1000, 1000);
+
+            movableSquare.draw();
+            staticSquare.draw();
+
+            update();
+            requestAnimationFrame(paint);
+        }
+
+        paint();
+
+        window.requestAnimationFrame = (function () {
+            return window.requestAnimationFrame ||
+                window.webkitRequestAnimationFrame ||
+                window.mozRequestAnimationFrame ||
+                function (callback) {
+                    window.setTimeout(callback, 17);
+                };
+        }());
+    </script>
+
+<style type="text/css">
+    body {
+        background-color: rgb(172, 168, 168);
+      
+    }
+</style>
+
+  
+</body>
+
+</html>
