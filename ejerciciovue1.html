@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trabajo Vue</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+botton...a su maquina se ve el comentario :=0
+<div id="app">
+    <button @click="cont++">
+        haz tocado el boton {{ cont }} veces
+    </button>
+    
+    <hr>
+
+nombre usuario
+<input type="text" v-model="inputText" placeholder="Escribe su nombre:">
+<p>{{ inputText }}</p>
+
+<hr>
+suma
+  <input type="number" v-model.number="num1" >
+  <input type="number" v-model.number="num2" >
+  <button @click="sum">Sumar</button>
+
+  <p> La suma es: {{ resultado }}</p>
+
+</div>
+
+<script>
+  const { createApp, ref } = Vue;
+
+  createApp({
+    setup() {
+      const cont = ref(0);
+      const inputText = ref('');
+      const count = ref(0);
+      const num1 = ref(0);
+      const num2 = ref(0);
+      const resultado = ref(0);
+
+      const sum = () => {
+        resultado.value = num1.value + num2.value;
+      }
+
+      return {
+        cont,
+        inputText,
+        num1,
+        num2,
+        sum,
+        resultado
+      }
+    }
+  }).mount('#app')
+  
+</script>
+
+</body>
+</html>
