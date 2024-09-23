@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trabajo Vue</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+<div id="app">
+    <h2>Login</h2>
+    <input type="text" v-model="loginUsername" placeholder="Usuario">
+    <input type="password" v-model="loginPassword" placeholder="Contraseña">
+    <button @click="login">Iniciar Sesión</button>
+    <p v-if="loginError" style="color: red">{{ loginError }}</p>
+    <p v-if="loginSuccess" style="color: green">Login exitoso</p>
+
+    <hr>
+
+    <button @click="cont++">
+        Has tocado el botón {{ cont }} veces
+    </button>
+
+    <hr>
+
+    Nombre usuario:
+    <input type="text" v-model="inputText" placeholder="Escribe su nombre:">
+    <p>{{ inputText }}</p>
+
+    <hr>
+
+    Suma:
+    <input type="number" v-model.number="num1" placeholder="Número 1">
+    <input type="number" v-model.number="num2" placeholder="Número 2">
+    <button @click="sum">Sumar</button>
+    <p>La suma es: {{ resultado }}</p>
+
+    <hr>
+
+    <h3>Lista de elementos aleatorios:</h3>
+    <ul>
+        <li v-for="(item, index) in items" :key="index">{{ item }}</li>
+    </ul>
+
+    <input type="text" v-model="newItem" placeholder="Añade un elemento:">
+    <button @click="addItem">Añadir</button>
+</div>
+
+<div v-if="isLogin">
+    <h1>Bienvenido, {{ email }}</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Contacto</th>
+                <th>Compañia</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr v-for="user in users" :key="user.email">
+                <td>{{ user.name }}</td>
+                <td>{{ user.contact }}</td>
+                <td>{{ user.company }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+</div>
+
+<script>
+  const { createApp, ref } = Vue;
+
+  createApp({
+    setup() {
+      const cont = ref(0);
+      const inputText = ref('');
+      const num1 = ref(0);
+      const num2 = ref(0);
+      const resultado = ref(0);
+      const items = ref([]);
+      const newItem = ref('');
+
+      const loginUsername = ref('');
+      const loginPassword = ref('');
+      const loginError = ref('');
+      const loginSuccess = ref(false);
+
+      const sum = () => {
+        resultado.value = num1.value + num2.value;
+      }
+
+      const addItem = () => {
+        if (newItem.value.trim()) {
+          items.value.push(newItem.value);
+          newItem.value = ''; 
+        }
+      }
+
+      const login = () => {
+        fetch('users.json') 
+          .then(response => response.json())
+          .then(data => {
+            const user = data.find(u => u.username === loginUsername.value && u.password === loginPassword.value);
+            if (user) {
+              loginSuccess.value = true;
+              loginError.value = '';
+            } else {
+              loginError.value = 'Usuario o contraseña incorrectos';
+              loginSuccess.value = false;
+            }
+          })
+          .catch(error => {
+            console.error('Error cargando el archivo JSON:', error);
+            loginError.value = 'Error cargando los datos';
+          });
+      }
+
+      return {
+        cont,
+        inputText,
+        num1,
+        num2,
+        sum,
+        resultado,
+        items,
+        newItem,
+        addItem,
+        loginUsername,
+        loginPassword,
+        loginError,
+        loginSuccess,
+        login
+      }
+    }
+  }).mount('#app')
+</script>
+
+</body>
+</html>
