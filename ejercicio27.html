@@ -1,0 +1,152 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+   
+    <canvas id="canvas" width="1000px" height="1000px"></canvas>
+   
+    <script>
+
+
+        const myCanvas = document.getElementById("canvas");
+        const ctx = myCanvas.getContext("2d");
+
+
+
+
+
+
+        //fondo
+        ctx.fillStyle= 'rgb(133, 255, 249)';
+        ctx.fillRect(0,0,1000,1000);
+
+
+         //cola
+         ctx.beginPath();
+        ctx.ellipse(750, 450, 200, 150, 4.5, 10,2 * Math.PI );
+        ctx.fillStyle = 'rgb(232, 232, 112)';
+        ctx.fill();
+        ctx.stroke(); 
+
+
+        //aleta izquierda
+        ctx.beginPath();
+        ctx.ellipse(300, 650, 30, 150, 0, 0,1 * Math.PI );
+        ctx.fillStyle = 'rgb(232, 232, 112)';
+        ctx.fill();
+        ctx.stroke(); 
+
+        //aleta dorsal
+        //aleta derecha
+        ctx.beginPath();
+        ctx.ellipse(400, 150, 30, 150, 7, 1,1 * Math.PI );
+        ctx.fillStyle = 'rgb(232, 232, 112)';
+        ctx.fill();
+        ctx.stroke(); 
+
+        //cuerpo
+        ctx.beginPath();
+         ctx.arc(400, 475, 250, 0, 2 * Math.PI);
+         ctx.fillStyle = 'rgb(232, 232, 112)'
+         ctx.stroke();
+         ctx.fill();
+
+
+          //puntos
+
+
+          for (x = 230; x < 580; x += 30) {
+             ctx.beginPath();
+             ctx.arc(x, 350, 2, 0, 2 * Math.PI);
+             ctx.fillStyle = "black";
+        ctx.fill();
+        }
+
+
+        for (x = 230; x < 580; x += 30) {
+             ctx.beginPath();
+             ctx.arc(x, 450, 2, 0, 2 * Math.PI);
+             ctx.fillStyle = "black";
+        ctx.fill();
+        }
+
+
+        for (x = 230; x < 580; x += 30) {
+             ctx.beginPath();
+             ctx.arc(x, 550, 2, 0, 2 * Math.PI);
+             ctx.fillStyle = "black";
+        ctx.fill();
+        }
+
+
+        for (x = 230; x < 580; x += 30) {
+             ctx.beginPath();
+             ctx.arc(x, 650, 2, 0, 2 * Math.PI);
+             ctx.fillStyle = "black";
+        ctx.fill();
+        }
+
+
+        //aleta derecha
+        ctx.beginPath();
+        ctx.ellipse(400, 650, 30, 150, 0, 0,1 * Math.PI );
+        ctx.fillStyle = 'rgb(232, 232, 112)';
+        ctx.fill();
+        ctx.stroke(); 
+
+
+        //boca
+         ctx.beginPath();
+         ctx.strokeStyle = "BLACK";
+         ctx.fillStyle = "BLACK";
+         ctx.arc(250, 450, 100, 0.8, 0.7 * Math.PI);
+         ctx.fill();
+         ctx.stroke();
+
+
+        //lengua
+         ctx.beginPath();
+         ctx.fillStyle = "red";
+         ctx.arc(260, 510, 40, 0.8, 0.7 * Math.PI);
+         ctx.fill();
+
+
+        //ojo der
+        ctx.beginPath();
+         ctx.arc(350, 415, 50, 0, 2 * Math.PI);
+         ctx.fillStyle = 'rgb(252, 255, 155)';
+         ctx.strokeStyle = "BLACK";
+         ctx.stroke();
+         ctx.fill();
+         ctx.beginPath();
+         ctx.arc(350, 415, 20, 0, 2 * Math.PI);
+         ctx.fillStyle = "black";
+         ctx.fill();
+       
+
+
+         //ojo izq
+        ctx.beginPath();
+         ctx.arc(150, 415, 50, 0, 2 * Math.PI);
+         ctx.fillStyle = 'rgb(252, 255, 155)';
+         ctx.strokeStyle = "BLACK";
+         ctx.stroke();
+         ctx.fill();
+         ctx.beginPath();
+         ctx.arc(150, 415, 20, 0, 2 * Math.PI);
+         ctx.fillStyle = "black";
+         ctx.fill();
+
+
+        
+
+
+       
+    </script>
+
+
+</body>
+</html>

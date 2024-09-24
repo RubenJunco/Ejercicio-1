@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cuadrado Móvil y Obstáculos</title>
+</head>
+
+<body>
+    <canvas id="canvas" width="1000px" height="1000px"></canvas>
+    <script type="text/javascript">
+        const myCanvas = document.getElementById("canvas");
+        const ctx = myCanvas.getContext("2d");
+
+        const speed = 9;
+
+        // Clase para las formas
+        class Shape {
+            constructor(x, y, width, height, color) {
+                this.x = x;
+                this.y = y;
+                this.width = width;
+                this.height = height;
+                this.color = color;
+            }
+
+            draw() {
+                ctx.fillStyle = this.color;
+                ctx.fillRect(this.x, this.y, this.width, this.height);
+            }
+
+            isCollidingWith(other) {
+                return !(this.x + this.width < other.x ||
+                    this.x > other.x + other.width ||
+                    this.y + this.height < other.y ||
+                    this.y > other.y + other.height);
+            }
+        }
+
+        // Crear el cuadrado móvil y el cuadrado estático
+        const movableSquare = new Shape(100, 100, 50, 50, "red");
+        const staticSquare = new Shape(400, 400, 50, 50, "blue");
+
+        // Crear un arreglo de obstáculos
+        const obstacles = [
+            new Shape(200, 200, 200, 50, "green"),
+            new Shape(500, 300, 100, 100, "purple"),
+            new Shape(300, 600, 150, 50, "orange")
+        ];
+
+        let direction = "";
+
+        document.addEventListener("keydown", (event) => {
+            switch (event.key) {
+                case "w":
+                    direction = "up";
+                    break;
+                case "s":
+                    direction = "down";
+                    break;
+                case "a":
+                    direction = "left";
+                    break;
+                case "d":
+                    direction = "right";
+                    break;
+            }
+        });
+
+        function update() {
+            const previousX = movableSquare.x;
+            const previousY = movableSquare.y;
+
+            switch (direction) {
+                case "up":
+                    movableSquare.y -= speed;
+                    break;
+                case "down":
+                    movableSquare.y += speed;
+                    break;
+                case "left":
+                    movableSquare.x -= speed;
+                    break;
+                case "right":
+                    movableSquare.x += speed;
+                    break;
+            }
+
+            // Verificar colisiones con cada obstáculo
+            obstacles.forEach(obstacle => {
+                if (movableSquare.isCollidingWith(obstacle)) {
+                    movableSquare.x = previousX;
+                    movableSquare.y = previousY;
+                }
+            });
+
+            // Verificar colisión con el cuadrado estático
+            if (movableSquare.isCollidingWith(staticSquare)) {
+                staticSquare.x = Math.floor(Math.random() * (myCanvas.width - staticSquare.width));
+                staticSquare.y = Math.floor(Math.random() * (myCanvas.height - staticSquare.height));
+            }
+
+            direction = ""; // Reseteamos la dirección después de cada actualización
+        }
+
+        function paint() {
+            ctx.clearRect(0, 0, myCanvas.width, myCanvas.height);
+
+            // Dibujar el cuadrado móvil y estático
+            movableSquare.draw();
+            staticSquare.draw();
+
+            // Dibujar todos los obstáculos
+            obstacles.forEach(obstacle => obstacle.draw());
+
+            update();
+            requestAnimationFrame(paint);
+        }
+
+        paint();
+
+    </script>
+
+    <style type="text/css">
+        body {
+            background-color: rgb(243, 255, 198);
+            
+        }
+    </style>
+</body>
+
+</html>

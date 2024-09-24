@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <canvas id="canvas" width="1000px" height="1000px"></canvas>
+    <script>
+    const myCanvas = document.getElementById("canvas");
+    const ctx = myCanvas.getContext("2d");
+
+    //cielo
+    ctx.fillStyle= 'rgb(152, 208, 255)';
+    ctx.fillRect(0,0,1000,1000);
+
+    //Sol
+    ctx.beginPath();
+    ctx.ellipse(450, 960, 200, 200, 6, 10,2 * Math.PI );
+    ctx.fillStyle = 'rgb(232, 232, 112)';
+    ctx.fill();
+    ctx.stroke(); 
+
+    //rayo 1
+    ctx.fillStyle= 'rgb(232, 232, 112)';
+    ctx.fillRect(420,600,50,100);
+   
+    //rayo 2
+    ctx.fillStyle= 'rgb(232, 232, 112)';
+    ctx.fillRect(530,630,50,100);
+   
+    //rayo 3
+    ctx.fillStyle= 'rgb(232, 232, 112)';
+    ctx.fillRect(320,630,50,100,);
+   
+    //rayo 4
+    ctx.fillStyle= 'rgb(232, 232, 112)';
+    ctx.fillRect(220,690,50,100);
+
+    //rayo 5
+    ctx.fillStyle= 'rgb(232, 232, 112)';
+    ctx.fillRect(620,690,50,100);
+
+    //CasaBase
+    ctx.fillStyle= 'rgb(255, 205, 91)';
+    ctx.fillRect(800,700,200,200);
+    ctx.fill();
+
+    //Techo
+        ctx.beginPath();
+        ctx.moveTo(900, 600); 
+        ctx.lineTo(1000, 700);  
+        ctx.lineTo(800, 700);  
+        ctx.closePath();       
+        ctx.fillStyle = 'rgb(247, 48, 48)';
+        ctx.fill();  
+
+    //pueta
+    ctx.beginPath();
+    ctx.fillStyle = 'rgb(124, 107, 69)';
+    ctx.fillRect(900,800,50,100);
+    ctx.fill();  
+    
+
+    //tierra
+    ctx.fillStyle= 'rgb(156, 119, 69)';
+    ctx.fillRect(0,900,1000,1000);
+
+    //cespet
+    ctx.fillStyle= 'rgb(78, 139, 55)';
+    ctx.fillRect(0,900,1000,20);
+
+
+
+
+
+    </script>
+</body>
+</html>
