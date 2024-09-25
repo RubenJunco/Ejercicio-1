@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trabajo Vue</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    
+</head>
+<body>
+<div id="app">
+    <h2>Login</h2>
+    <input type="text" v-model="loginUsername" placeholder="Usuario">
+    <input type="password" v-model="loginPassword" placeholder="Contraseña">
+    <button @click="login">Iniciar Sesión</button>
+    <p v-if="loginError" class="error">{{ loginError }}</p>
+    <p v-if="loginSuccess" class="success">Login exitoso</p>
+
+    <div v-if="loginSuccess">
+        <h1>Bienvenido, {{ loginUsername }}</h1>
+
+        
+        <h3>Agregar nuevo usuario:</h3>
+        <input type="text" v-model="newUser.name" placeholder="Nombre">
+        <input type="text" v-model="newUser.username" placeholder="Usuario">
+        <input type="email" v-model="newUser.email" placeholder="Correo">
+        <input type="tel" v-model="newUser.phone" placeholder="Teléfono">
+        <button @click="addUser">Agregar Usuario</button>
+
+        <button @click="toggleTable">{{ showTable ? 'Minimizar' : 'Extender' }} Tabla</button>
+
+        <div v-if="showTable">
+            <h3>Lista de Usuarios Registrados:</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Usuario</th>
+                        <th>Correo</th>
+                        <th>Teléfono</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="(user, index) in users" :key="user.email">
+                        <td>{{ user.name }}</td>
+                        <td>{{ user.username }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>{{ user.phone }}</td>
+                        <td>
+                            <button @click="editUser(index)">Editar</button>
+                            <button @click="deleteUser(index)">Eliminar</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script>
+  const { createApp, ref } = Vue;
+
+  createApp({
+    setup() {
+      const loginUsername = ref('');
+      const loginPassword = ref('');
+      const loginError = ref('');
+      const loginSuccess = ref(false);
+      const users = ref([]);
+      const showTable = ref(true);  
+      
+      const newUser = ref({
+        name: '',
+        username: '',
+        email: '',
+        phone: ''
+      });
+
+      const login = () => {
+        fetch('users.json')
+          .then(response => response.json())
+          .then(data => {
+            const user = data.find(u => u.username === loginUsername.value && u.password === loginPassword.value);
+            if (user) {
+              loginSuccess.value = true;
+              loginError.value = '';
+              users.value = data;  
+            } else {
+              loginError.value = 'Usuario o contraseña incorrectos';
+              loginSuccess.value = false;
+            }
+          })
+          .catch(error => {
+            console.error('Error cargando el archivo JSON:', error);
+            loginError.value = 'Error cargando los datos';
+          });
+      }
+
+      const addUser = () => {
+        if (newUser.value.name && newUser.value.username && newUser.value.email && newUser.value.phone) {
+          users.value.push({ ...newUser.value });
+          newUser.value = { name: '', username: '', email: '', phone: '' };
+        }
+      };
+
+      const editUser = (index) => {
+        const userToEdit = users.value[index];
+        newUser.value = { ...userToEdit };
+        users.value.splice(index, 1); // Eliminar temporalmente para actualizar
+      };
+
+      const deleteUser = (index) => {
+        users.value.splice(index, 1);
+      };
+
+      const toggleTable = () => {
+        showTable.value = !showTable.value;  
+      };
+
+      return {
+        loginUsername,
+        loginPassword,
+        loginError,
+        loginSuccess,
+        users,
+        newUser,
+        showTable,
+        login,
+        addUser,
+        editUser,
+        deleteUser,
+        toggleTable
+      }
+    }
+  }).mount('#app')
+</script>
+
+<style>
+  body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 20px;
+  }
+
+  #app {
+      max-width: 600px;
+      margin: 0 auto;
+      background-color: #fff;
+      padding: 20px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+  }
+
+  h2, h3, h1 {
+      text-align: center;
+      color: #333;
+  }
+
+  input[type="text"], input[type="password"], input[type="email"], input[type="tel"] {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+  }
+
+  button {
+      background-color: #7969a3;
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      width: 100%;
+      margin-top: 10px;
+  }
+
+  button:hover {
+      background-color: #574c74;
+  }
+
+  table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+  }
+
+  table th, table td {
+      border: 1px solid #ddd;
+      padding: 10px;
+      text-align: left;
+  }
+
+  table th {
+      background-color: #f2f2f2;
+  }
+
+  table tr:hover {
+      background-color: #f1f1f1;
+  }
+
+  .error {
+      color: red;
+      text-align: center;
+  }
+
+  .success {
+      color: green;
+      text-align: center;
+  }
+</style>
+
+</body>
+</html>
